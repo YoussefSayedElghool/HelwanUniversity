@@ -7,13 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Consts\" />
     <Folder Include="Contracts\services\" />
-    <Folder Include="Contracts\Repositories\" />
-    <Folder Include="Contracts\UnitOfWork\" />
     <Folder Include="Dtos\" />
-    <Folder Include="Helpers\" />
-    <Folder Include="Models\" />
   </ItemGroup>
 
 </Project>
