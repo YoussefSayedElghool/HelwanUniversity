@@ -1,0 +1,6 @@
+@HelwanUniversity_HostAddress = http://localhost:5160
+
+GET {{HelwanUniversity_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
