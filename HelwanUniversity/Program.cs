@@ -1,4 +1,8 @@
 
+using HelwanUniversity.Infrastructure.Data.EFCore;
+using Microsoft.EntityFrameworkCore;
+using System;
+
 namespace HelwanUniversity
 {
     public class Program
@@ -8,6 +12,14 @@ namespace HelwanUniversity
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddDbContext<AppDbContext>(optionBuilder =>
+            {
+
+                optionBuilder.UseLazyLoadingProxies().UseSqlServer(builder.Configuration.GetConnectionString("cs"));
+            });
+
+
+
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
