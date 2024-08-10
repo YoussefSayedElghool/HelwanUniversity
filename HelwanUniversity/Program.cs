@@ -2,6 +2,7 @@
 using EmployeeUnitOfWorkVersion.Business.Repository;
 using HelwanUniversity.Core.Contracts.Repositories;
 using HelwanUniversity.Core.Contracts.UnitOfWork;
+using HelwanUniversity.Infrastructure.Caching;
 using HelwanUniversity.Infrastructure.Data.EFCore;
 using HelwanUniversity.Infrastructure.Query;
 using HelwanUniversity.Infrastructure.Repositories;
@@ -24,6 +25,7 @@ namespace HelwanUniversity
 
                 optionBuilder.UseLazyLoadingProxies().UseSqlServer(builder.Configuration.GetConnectionString("cs"));
             });
+            builder.Services.AddMemoryCache();
 
             //builder.Services.AddScoped<IBaseRepository, BaseRepository>();
             builder.Services.AddScoped<IStudentRepository, StudentRepository>();
@@ -31,6 +33,8 @@ namespace HelwanUniversity
 
 
             builder.Services.AddMediatR(typeof(GetAllStudentsQuery).Assembly);
+
+            builder.Services.Decorate<IStudentRepository, StudentRepositoryCachingDecorator>();
 
 
             builder.Services.AddControllers();
