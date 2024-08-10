@@ -1,5 +1,12 @@
 
+using EmployeeUnitOfWorkVersion.Business.Repository;
+using HelwanUniversity.Core.Contracts.Repositories;
+using HelwanUniversity.Core.Contracts.UnitOfWork;
 using HelwanUniversity.Infrastructure.Data.EFCore;
+using HelwanUniversity.Infrastructure.Query;
+using HelwanUniversity.Infrastructure.Repositories;
+using HelwanUniversity.Infrastructure.UnitOfWork;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -18,7 +25,12 @@ namespace HelwanUniversity
                 optionBuilder.UseLazyLoadingProxies().UseSqlServer(builder.Configuration.GetConnectionString("cs"));
             });
 
+            //builder.Services.AddScoped<IBaseRepository, BaseRepository>();
+            builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+
+            builder.Services.AddMediatR(typeof(GetAllStudentsQuery).Assembly);
 
 
             builder.Services.AddControllers();
